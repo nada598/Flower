@@ -1,109 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <img src="Asset6.png" alt="اختبار: أي وردة أنت؟" style="width:300px; margin-bottom:20px;">
-    <style>
-        body { font-family: Arial, sans-serif; background: #fff8f0; text-align: center; padding: 20px; }
-        h1 { color: #d14595; }
-        .question { margin: 20px 0; text-align: right; }
-        .options label { display: block; margin: 5px 0; cursor: pointer; }
-        .flower-img { width: 200px; margin-top: 20px; }
-        #calculate { margin-top: 20px; padding: 10px 20px; font-size: 16px; background: #d14595; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        #result { margin-top: 20px; font-size: 20px; font-weight: bold; color: #1e7c3a; }
-    </style>
-</head>
-<body>
-
-<form id="quiz-form">
-    <div class="question">
-        <div>١. لو كنت قطعة حلوى، ماذا ستكون؟</div>
-        <label><input type="radio" name="q1" value="ا"> شوكولاتة داكنة</label>
-        <label><input type="radio" name="q1" value="ب"> علبة حلوى بنكهات فريدة</label>
-        <label><input type="radio" name="q1" value="ج"> مصاصة ملونة</label>
-        <label><input type="radio" name="q1" value="د"> تيراميسو</label>
-    </div>
-
-    <div class="question">
-        <div>٢. في مجموعة الأصدقاء، أنت عادة:</div>
-        <label><input type="radio" name="q2" value="ا"> المستمع والداعم</label>
-        <label><input type="radio" name="q2" value="ب"> القائد أو من يخطط</label>
-        <label><input type="radio" name="q2" value="ج"> من يُضحك الجميع</label>
-        <label><input type="radio" name="q2" value="د"> المتأمل والمفكر</label>
-    </div>
-
-    <div class="question">
-        <div>٣. كيف تصف طاقتك اليومية؟</div>
-        <label><input type="radio" name="q3" value="ا"> هادئة ومنعشة</label>
-        <label><input type="radio" name="q3" value="ب"> قوية وواضحة</label>
-        <label><input type="radio" name="q3" value="ج"> عفوية ومليئة بالحيوية</label>
-        <label><input type="radio" name="q3" value="د"> متغيرة حسب السياق</label>
-    </div>
-
-    <div class="question">
-        <div>٤. أي لون يجذبك أكثر؟</div>
-        <label><input type="radio" name="q4" value="ا"> أبيض</label>
-        <label><input type="radio" name="q4" value="ب"> أصفر</label>
-        <label><input type="radio" name="q4" value="ج"> زهري</label>
-        <label><input type="radio" name="q4" value="د"> أزرق</label>
-    </div>
-
-    <div class="question">
-        <div>٥. كيف تفضل قضاء عطلتك؟</div>
-        <label><input type="radio" name="q5" value="ا"> في مكان طبيعي هادئ</label>
-        <label><input type="radio" name="q5" value="ب"> مغامرات وتجارب جديدة</label>
-        <label><input type="radio" name="q5" value="ج"> برحلة ممتعة مع الأصدقاء</label>
-        <label><input type="radio" name="q5" value="د"> في مكان فني أو ثقافي</label>
-    </div>
-
-    <div class="question">
-        <div>٦. من هو أقرب مغني/مغنية إلى ذوقك؟</div>
-        <label><input type="radio" name="q6" value="ا"> فيروز</label>
-        <label><input type="radio" name="q6" value="ب"> كاظم الساهر</label>
-        <label><input type="radio" name="q6" value="ج"> نانسي عجرم</label>
-        <label><input type="radio" name="q6" value="د"> أم كلثوم</label>
-    </div>
-
-    <button type="button" id="calculate">احسب النتيجة</button>
-</form>
-
-<div id="result"></div>
-
-<script>
-document.getElementById("calculate").addEventListener("click", function() {
-    const answers = [];
-    for (let i = 1; i <= 6; i++) {
-        const checked = document.querySelector(`input[name="q${i}"]:checked`);
-        if (!checked) {
-            alert("يرجى الإجابة على جميع الأسئلة");
-            return;
-        }
-        answers.push(checked.value);
-    }
-
-    // حساب أكثر حرف متكرر
-    const counts = {};
-    answers.forEach(a => counts[a] = (counts[a] || 0) + 1);
-    const max = Object.entries(counts).sort((a,b)=>b[1]-a[1])[0][0];
-
-    // خريطة الورود
-    const flowerMap = {
-        "ا": { name: "🌼 الزنبق الأبيض", image: "https://i.ibb.co/6RsV7F4/flower-a.png" },
-        "ب": { name: "🌻 دوار الشمس", image: "https://i.ibb.co/bJ2QXk1/flower-b.png" },
-        "ج": { name: "🌸 زهرة الكرز", image: "https://i.ibb.co/pxX6pFJ/flower-c.png" },
-        "د": { name: "💜 زهرة الخزامى", image: "https://i.ibb.co/q5V8QZt/flower-d.png" }
-    };
-
-    const flower = flowerMap[max];
-    document.getElementById("result").innerHTML = `
-        <h2>وردة شخصيتك هي:</h2>
-        <h3>${flower.name}</h3>
-        <img src="${flower.image}" class="flower-img" alt="${flower.name}">
-        <p>🌸 استمتع بيومك الجميل 🌸</p>
-    `;
-});
-</script>
-
-</body>
-</html>
